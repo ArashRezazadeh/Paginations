@@ -17,6 +17,17 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(connect
 
 builder.Services.AddScoped<IProductServices, ProductServices>();
 
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy("CorsPolicy", builder =>
+    {
+        builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .WithExposedHeaders("X-Pagination");
+    });
+});
 
 var app = builder.Build();
 
@@ -47,8 +58,9 @@ using (var scope = app.Services.CreateScope())
 
 //     return products;
 // });
-app.MapControllers();
 
+app.UseCors("CorsPolicy");
+app.MapControllers();
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
