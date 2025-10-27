@@ -13,6 +13,7 @@ builder.Services.AddControllers();
 var connectionString = "DataSource=myshareddb;mode=memory;cache=shared";
 var connection = new SqliteConnection(connectionString);
 connection.Open();
+builder.Services.AddMemoryCache();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(connection));
 
 builder.Services.AddScoped<IProductServices, ProductServices>();

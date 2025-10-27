@@ -111,7 +111,9 @@ public class ProductController : ControllerBase
             HasPreviousPage = pagedResult.HasPreviousPage,
             HasNextPage = pagedResult.HasNextPage,
             PreviousPageUrl = previousPageUrl,
-            NextPageUrl = nextPageUrl
+            NextPageUrl = nextPageUrl,
+            FirstPageUrl = Url.Action("GetProducts", new { pageSize }),
+            LastPageUrl = Url.Action("GetProducts", new { pageSize, lastProductId = (pagedResult.TotalPages - 1) * pageSize })
         };
 
 
