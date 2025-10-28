@@ -7,5 +7,6 @@ public abstract record PagedResponse<T>
     public int PageSize { get; init; }
     public bool HasPreviousPage { get; init; }
     public bool HasNextPage { get; init; }
-    public int TotalPages { get; init ; }
+    public int TotalPages { get; init; }
+    public Dictionary<int, decimal> AveragePricePerCategory { get; init; } = new();
 }
